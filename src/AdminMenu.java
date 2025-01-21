@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class AdminMenu {
     private static final AdminResource adminResource = new AdminResource();
-    public static void main(String[] args) {
+    public static void adminMenu() {
         Scanner sc= new Scanner(System.in);
         String adminChoice="";
 
@@ -31,7 +31,7 @@ public class AdminMenu {
                             addRoom();
                             break;
                         case '5':
-//                            MainMenu.printMainMenu();
+                            MainMenu.printMainMenu();
                             break;
                         default:
                             System.out.println("Unknown action\n");
