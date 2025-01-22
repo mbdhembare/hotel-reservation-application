@@ -11,8 +11,14 @@ import java.util.Collections;
 import java.util.Date;
 
 public class HotelResource {
-    private final CustomerService customerService = new CustomerService();
-    private final ReservationService reservationService = new ReservationService();
+
+    private static final HotelResource SINGLETON = new HotelResource();
+    private HotelResource(){}
+    public static HotelResource getSingleton(){
+        return SINGLETON;
+    }
+    private final CustomerService customerService = CustomerService.getSingleton();
+    private final ReservationService reservationService = ReservationService.getSingleton();
 
     public Customer getCustomer(String email){
         return customerService.getCustomer(email);
@@ -37,11 +43,11 @@ public class HotelResource {
         return reservationService.getCustomersReservation(customer);
     }
 
-    public Collection<IRoom> findARoom(Date checkIn, Date checkOut){
+    public Collection<IRoom> findARoom(final Date checkIn, final Date checkOut){
         return reservationService.findRooms(checkIn, checkOut);
     }
 
-    public Collection<IRoom> findAlternativeRoom(Date checkIn, Date checkOut){
+    public Collection<IRoom> findAlternativeRoom(final Date checkIn, final Date checkOut){
         return reservationService.findAlternativeRooms(checkIn, checkOut);
     }
 

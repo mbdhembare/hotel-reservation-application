@@ -1,12 +1,14 @@
 package model;
 
-public class Room implements IRoom{
-    String roomNumber;
-    double price;
-    RoomType enumeration;
+import java.util.Objects;
 
-    public Room(String roomNumber, double price, RoomType enumeration){
-        super();
+public class Room implements IRoom{
+    private final String roomNumber;
+    private final double price;
+    private final RoomType enumeration;
+    private static final double FREE_PRICE_THRESHOLD = 0.0;
+
+    public Room(final String roomNumber, final double price, final RoomType enumeration){
         this.roomNumber=roomNumber;
         this.price=price;
         this.enumeration=enumeration;
@@ -29,7 +31,7 @@ public class Room implements IRoom{
 
     @Override
     public boolean isFree() {
-        return false;
+        return this.price == FREE_PRICE_THRESHOLD;
     }
 
     @Override
@@ -37,7 +39,26 @@ public class Room implements IRoom{
         return "Room{" +
                 "roomNumber='" + roomNumber + '\'' +
                 ", price=" + price +
-                ", enumeration=" + enumeration +
+                ", room type=" + enumeration +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == this) {
+            return true;
+        }
+
+        if(!(obj instanceof Room)) {
+            return false;
+        }
+
+        final Room room = (Room) obj;
+        return Objects.equals(this.roomNumber, room.roomNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(roomNumber);
     }
 }

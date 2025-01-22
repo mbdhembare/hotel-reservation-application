@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class AdminMenu {
-    private static final AdminResource adminResource = new AdminResource();
+    private static final AdminResource adminResource = AdminResource.getSingleton();
     public static void adminMenu() {
         Scanner sc= new Scanner(System.in);
         String adminChoice="";
@@ -64,7 +64,7 @@ public class AdminMenu {
         if(customers.isEmpty()){
             System.out.println("no customer found");
         }else{
-            customers.forEach(System.out::println);
+            adminResource.getAllCustomers().forEach(System.out::println);
         }
     }
 
@@ -74,7 +74,7 @@ public class AdminMenu {
         if(rooms.isEmpty()){
             System.out.println("no room found");
         }else{
-            rooms.forEach(System.out::println);
+            adminResource.getAllRooms().forEach(System.out::println);
         }
     }
 

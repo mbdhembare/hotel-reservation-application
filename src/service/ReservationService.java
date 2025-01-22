@@ -8,22 +8,30 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ReservationService {
+
+    private static final ReservationService SINGLETON = new ReservationService();
     private static final int RECOMMENDED_ROOMS_DEFAULT_PLUS_DAYS = 7;
     private final Map<String, IRoom> rooms = new HashMap<>();
     private final Map<String, Collection<Reservation>> reservations = new HashMap<>();
 
-    public void addRoom(IRoom room){
+    private ReservationService() {}
+
+    public static ReservationService getSingleton() {
+        return SINGLETON;
+    }
+
+    public void addRoom(final IRoom room){
         rooms.put(room.getRoomNumber(), room);
     }
 
-    public IRoom getARoom(String roomId){
+    public IRoom getARoom(final String roomId){
         return rooms.get(roomId);
     }
 
     public Collection<IRoom> getAllRooms(){
         return rooms.values();
     }
-    public Reservation reservationRoom(Customer customer, IRoom room, Date checkInDate, Date checkOutDate){
+    public Reservation reservationRoom(final Customer customer, final IRoom room, final Date checkInDate, final Date checkOutDate){
         // Create a new reservation
         Reservation reservation = new Reservation(customer, room, checkInDate, checkOutDate);
 
@@ -41,7 +49,7 @@ public class ReservationService {
         return reservation; // Return the newly created reservation
     }
 
-    public Collection<IRoom> findRooms(Date checkInDate, Date checkOutDate){
+    public Collection<IRoom> findRooms(final Date checkInDate, final Date checkOutDate){
         return findAvailableRooms(checkInDate, checkOutDate);
     }
 

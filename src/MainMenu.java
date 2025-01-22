@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class MainMenu {
     private static final String DEFAULT_DATE_FORMAT = "MM/dd/yyyy";
-    private static final HotelResource hotelResource= new HotelResource();
+    private static final HotelResource hotelResource= HotelResource.getSingleton();
 
     public static void mainMenu() {
         Scanner sc= new Scanner(System.in);
@@ -177,16 +177,16 @@ public class MainMenu {
     }
 
     private static void createAccount() {
-        final Scanner sc = new Scanner(System.in);
+         Scanner sc = new Scanner(System.in);
 
         System.out.println("Enter Email format: name@domain.com");
-        final String email = sc.nextLine();
+         String email = sc.nextLine();
 
         System.out.println("First Name:");
-        final String firstName = sc.nextLine();
+         String firstName = sc.nextLine();
 
         System.out.println("Last Name:");
-        final String lastName = sc.nextLine();
+         String lastName = sc.nextLine();
 
         try {
             hotelResource.createACustomer(email, firstName, lastName);
