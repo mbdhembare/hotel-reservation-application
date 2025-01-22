@@ -115,7 +115,15 @@ public class AdminMenu {
 
     private static RoomType enterRoomType(final Scanner sc) {
         try {
-            return RoomType.valueOf(sc.nextLine());
+            int roomTypeChoice = Integer.parseInt(sc.nextLine());
+            return switch (roomTypeChoice) {
+                case 1 -> RoomType.SINGLE;
+                case 2 -> RoomType.DOUBLE;
+                default -> {
+                    System.out.println("Invalid choice! Please select 1 for SINGLE or 2 for DOUBLE.");
+                    yield enterRoomType(sc);
+                }
+            };
         } catch (IllegalArgumentException exp) {
             System.out.println("Invalid room type! Please, choose 1 for single bed or 2 for double bed:");
             return enterRoomType(sc);

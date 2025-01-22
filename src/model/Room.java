@@ -25,7 +25,7 @@ public class Room implements IRoom{
     }
 
     @Override
-    public RoomType getRoomTYpe() {
+    public RoomType getRoomType() {
         return this.enumeration;
     }
 
@@ -39,7 +39,7 @@ public class Room implements IRoom{
         return "Room{" +
                 "roomNumber='" + roomNumber + '\'' +
                 ", price=" + price +
-                ", room type=" + enumeration +
+                ", roomtype=" + enumeration +
                 '}';
     }
 
